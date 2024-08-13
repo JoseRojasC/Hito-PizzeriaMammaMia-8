@@ -69,3 +69,6 @@ const RegisterPage = ({ onRegister }) => {
 };
 
 export default RegisterPage;
+
+
+
