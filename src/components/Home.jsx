@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CardPizza from './CardPizza';  
-import { pizzas } from '../pizzas';
+// import { pizzas } from '../pizzas';
 
 const Home = ({ addToCart }) => {
+  const [ pizzas, SetPizzas ] = useState ([])
+
+  const getPizzas = async () => {
+  const respuesta = await fetch('http://localhost:5000/api/pizzas')
+  const pizzas = await respuesta.json()
+
+  SetPizzas(pizzas)
+  }
+  
+  useEffect (() => {
+    getPizzas()
+  }, [])
+
   return (
     <div className="container mt-4">
       <div className="row">

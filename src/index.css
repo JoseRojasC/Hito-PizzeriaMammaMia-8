@@ -25,76 +25,6 @@ body, html {
   border-bottom: 4px solid yellow;
 }
 
-.navbar-collapse {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.navbar-dark .navbar-nav .nav-link {
-  color: white;
-  background-color: #444;
-  border-radius: 0.25rem;
-  padding: 0.5rem 1rem;
-  margin-right: 5px;
-}
-
-.navbar-dark .navbar-nav .nav-link:hover {
-  background-color: #555;
-}
-
-.navbar-brand {
-  color: white;
-  font-size: 1.5rem;
-  margin-right: 15px;
-}
-
-.navbar-text {
-  color: white;
-  font-weight: bold;
-  font-size: 1.2rem;
-  background-color: #007bff;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-}
-
-.navbar-total-button {
-  background-color: #22502c;
-  color: white;
-  border-radius: 20px;
-  padding: 0.5rem 1.5rem;
-  font-weight: bold;
-  font-size: 1rem;
-  min-width: 150px; 
-  transition: background-color 0.25s ease;
-}
-
-.navbar-total-button:hover {
-  background-color: #218838; 
-}
-
-.ml-auto {
-  margin-left: auto; 
-}
-
-/* Estilo para dispositivos móviles */
-@media (max-width: 768px) {
-  .navbar-nav {
-    text-align: center;
-    width: 100%;
-  }
-
-  .navbar-brand, .navbar-text {
-    text-align: center;
-    width: 100%;
-  }
-
-  .navbar-collapse {
-    flex-direction: column;
-  }
-}
-
 /* Header */
 header {
   position: relative;
@@ -131,80 +61,24 @@ header p {
   font-size: 1.2em;
 }
 
-/* Card Styles */
-.card {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.card-img-top {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  max-height: 200px;
-}
-
-.card-title {
-  font-size: 1.5em;
-  margin: 15px 0 10px;
-}
-
-.card-subtitle {
-  font-size: 1em;
-  color: #666;
-}
-
-.card-text {
-  font-size: 1em;
-  color: #555;
-}
-
-.card-price {
-  font-size: 1.2em;
-  font-weight: bold;
-  margin: 20px 0;
-  color: #000;
-}
-
-.btn-outline-primary, .btn-outline-success {
-  margin-top: 10px;
-  border-radius: 20px;
-}
-
-.btn-outline-primary {
-  color: #007bff;
-  border-color: #007bff;
-}
-
-.btn-outline-success {
-  color: #28a745;
-  border-color: #28a745;
-}
-
-.btn-outline-primary:hover, .btn-outline-success:hover {
+/* Estilos específicos para el botón de total en la Navbar */
+.navbar-total-button {
+  background-color: #22502c;
   color: white;
-  background-color: currentColor;
-  border-color: currentColor;
+  border-radius: 20px;
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+  min-width: 150px; 
+  transition: background-color 0.25s ease;
 }
 
-@media (max-width: 768px) {
-  .card {
-    margin-bottom: 15px;
-  }
+.navbar-total-button:hover {
+  background-color: #218838; 
+}
 
-  .card-title {
-    font-size: 1.2em;
-  }
-
-  .card-price {
-    font-size: 1em;
-  }
+.ml-auto {
+  margin-left: auto; 
 }
 
 /* Footer */
@@ -257,33 +131,6 @@ button:focus-visible {
   max-width: 100%;
 }
 
-.register-form h2 {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.register-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-}
-
-.register-form button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.register-form button:hover {
-  background-color: #0056b3;
-}
-
 /* Light Mode Styles */
 @media (prefers-color-scheme: light) {
   :root {
@@ -299,4 +146,3 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
