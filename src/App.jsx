@@ -44,6 +44,18 @@ const App = () => {
     });
   };
 
+  const removeFromCart = (id) => {
+    setCartItems((prevItems) => prevItems.filter(item => item.id !== id));
+  };
+
+  const updateCartQuantity = (id, quantity) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
+      )
+    );
+  };
+
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
@@ -57,7 +69,17 @@ const App = () => {
         <Route path="/" element={<Home addToCart={addToCart} />} />
         <Route path="/register" element={<RegisterPage onRegister={handleLogin} />} />
         <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
-        <Route path="/cart" element={<CartPage cartItems={cartItems} total={total} />} />
+        <Route
+          path="/cart"
+          element={
+            <CartPage
+              cartItems={cartItems}
+              total={total}
+              removeFromCart={removeFromCart}
+              updateCartQuantity={updateCartQuantity}
+            />
+          }
+        />
         <Route path="/pizza/p001" element={<Pizza />} />
         <Route path="/profile" element={token ? <Profile handleLogout={handleLogout} /> : <Navigate to="/login" />} />
         <Route path="/404" element={<NotFound />} />
