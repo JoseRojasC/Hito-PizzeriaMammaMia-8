@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-// import Home from "./components/Home";
-import RegisterPage from "./components/RegisterPage";
-import LoginPage from "./components/LoginPage";
-import CartModal from "./components/CartModal";
-import Pizza from "./components/Pizza";
+import React, { useState, useEffect } from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Home from './pages/Home'; 
+import CartPage from './pages/CartPage'; 
+import Pizza from './pages/Pizza'; 
+import Profile from './pages/Profile'; 
+import NotFound from './pages/NotFound'; 
+import RegisterPage from './pages/RegisterPage'; 
+import LoginPage from './pages/LoginPage'; 
 
 const App = () => {
   const [token, setToken] = useState(null);
   const [cartItems, setCartItems] = useState([]);
-  const [showCart, setShowCart] = useState(false);
 
   useEffect(() => {
     const savedToken = localStorage.getItem("authToken");
@@ -42,64 +42,29 @@ const App = () => {
         return [...prevItems, { ...pizza, quantity: 1 }];
       }
     });
-    setShowCart(true); // Mostrar el carrito
   };
 
-  const removeFromCart = (pizzaId) => {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.id !== pizzaId)
-    );
-  };
-
-  const updateCartQuantity = (pizzaId, newQuantity) => {
-    if (newQuantity <= 0) {
-      removeFromCart(pizzaId);
-    } else {
-      setCartItems((prevItems) =>
-        prevItems.map((item) =>
-          item.id === pizzaId ? { ...item, quantity: newQuantity } : item
-        )
-      );
-    }
-  };
-
-  const total = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
-
-  const handleShowCart = () => setShowCart(true);
-  const handleCloseCart = () => setShowCart(false);
+  const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <Router>
-      <div>
-        <Navbar
-          token={token}
-          handleLogout={handleLogout}
-          cartItems={cartItems}
-          total={total}
-          removeFromCart={removeFromCart}
-          handleShowCart={handleShowCart}
-        />
-        <Header />
-        <Routes>
-          {/*  <Route path="/" element={<Home addToCart={addToCart} />} /> */}
-        </Routes>
-        <CartModal
-          cartItems={cartItems}
-          total={total}
-          removeFromCart={removeFromCart}
-          updateCartQuantity={updateCartQuantity}
-          show={showCart}
-          handleClose={handleCloseCart}
-        />
-        <RegisterPage onRegister={handleLogin} />
-        <LoginPage onLogin={handleLogin} />
-        <Pizza /> 
-        <Footer />
-      </div>
-    </Router>
+    <>
+      <Navbar
+        token={token}
+        handleLogout={handleLogout}
+        total={total}
+      />
+      <Routes>
+        <Route path="/" element={<Home addToCart={addToCart} />} />
+        <Route path="/register" element={<RegisterPage onRegister={handleLogin} />} />
+        <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+        <Route path="/cart" element={<CartPage cartItems={cartItems} total={total} />} />
+        <Route path="/pizza/p001" element={<Pizza />} />
+        <Route path="/profile" element={token ? <Profile handleLogout={handleLogout} /> : <Navigate to="/login" />} />
+        <Route path="/404" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/404" />} /> {/* Redirige a la página 404 si la ruta no existe */}
+      </Routes>
+      <Footer />
+    </>
   );
 };
 

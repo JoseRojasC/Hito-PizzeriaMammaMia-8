@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CardPizza from "./CardPizza";
+import CardPizza from "../components/CardPizza";
 import { formatCurrency } from "../assets/helpers/format"; 
 
 function Pizzas() {

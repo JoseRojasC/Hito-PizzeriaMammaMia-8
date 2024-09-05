@@ -23,6 +23,44 @@ body, html {
 /* Navbar */
 .navbar {
   border-bottom: 4px solid yellow;
+  padding: 0.5rem 1rem;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff !important;
+}
+
+.navbar-nav .nav-link {
+  color: white !important;
+  font-size: 1rem;
+}
+
+.navbar-nav .nav-link:hover {
+  color: yellow !important;
+}
+
+/* Estilos específicos para el botón de total en la Navbar */
+.navbar .navbar-total-button {
+  background-color: #22502c;
+  color: white;
+  border-radius: 8px;
+  padding: 0.3rem 1rem; 
+  font-weight: bold;
+  font-size: 0.875rem; 
+  min-width: 100px; 
+  max-width: 150px; 
+  transition: background-color 0.25s ease;
+}
+
+.navbar .navbar-total-button:hover {
+  background-color: #218838; 
+}
+
+
+.ml-auto {
+  margin-left: auto; 
 }
 
 /* Header */
@@ -32,53 +70,37 @@ header {
   color: white;
   height: 300px;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 header img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 header div {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px 20px;
-  border-radius: 5px;
+  position: relative;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 8px;
 }
 
 header h1 {
+  font-size: 3em;
   margin: 0;
-  font-size: 3.2em;
-  line-height: 1.1;
 }
 
 header p {
-  margin: 0;
   font-size: 1.2em;
-}
-
-/* Estilos específicos para el botón de total en la Navbar */
-.navbar-total-button {
-  background-color: #22502c;
-  color: white;
-  border-radius: 20px;
-  padding: 0.5rem 1.5rem;
-  font-weight: bold;
-  font-size: 1rem;
-  min-width: 150px; 
-  transition: background-color 0.25s ease;
-}
-
-.navbar-total-button:hover {
-  background-color: #218838; 
-}
-
-.ml-auto {
-  margin-left: auto; 
+  margin-top: 10px;
 }
 
 /* Footer */
@@ -87,10 +109,80 @@ footer {
   color: white;
   border-top: 4px solid yellow;
   text-align: center;
-  padding: 10px 0;
+  padding: 20px 0;
+  margin-top: 2rem;
 }
 
-/* General Button Styles */
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+
+.card {
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  transition: box-shadow 0.25s ease;
+  height: 100%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+  border-radius: 10px 10px 0 0;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.card-price {
+  font-size: 1.5rem;
+  color: #28a745;
+  font-weight: bold;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.card-text {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center; 
+}
+
+.list-group-item {
+  border: none;
+  padding-left: 0;
+  text-align: left;
+}
+
+.btn {
+  margin-top: auto;
+  width: 100%;
+}
+
+
+/* Button Styles */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -99,17 +191,30 @@ button {
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
+  color: white;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background-color 0.25s ease, transform 0.25s ease;
 }
 
 button:hover {
-  border-color: black;
+  background-color: #333;
+  transform: scale(1.05);
 }
 
-button:focus,
-button:focus-visible {
+button:focus {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Añadir al carrito button */
+.btn-success {
+  background-color: #28a745;
+  color: white;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  transform: scale(1.05);
 }
 
 /* Register Modal Styles */
@@ -129,6 +234,28 @@ button:focus-visible {
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
   width: 300px;
   max-width: 100%;
+}
+
+.modal-content button {
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.modal-content button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.modal-content .form-control {
+  border-radius: 8px;
+  padding: 0.5rem;
+  font-size: 1rem;
 }
 
 /* Light Mode Styles */
