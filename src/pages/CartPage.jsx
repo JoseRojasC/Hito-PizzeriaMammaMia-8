@@ -1,7 +1,10 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { useCartContext } from '../Context/CartContext'; // Importa el contexto del carrito
 
-const CartPage = ({ cartItems, total, removeFromCart, updateCartQuantity }) => {
+const CartPage = () => {
+  const { cartItems, total, removeFromCart, updateCartQuantity } = useCartContext(); // Usa el contexto
+
   return (
     <div className="container mt-5">
       <h1 className="text-center mb-4">
@@ -58,3 +61,4 @@ const CartPage = ({ cartItems, total, removeFromCart, updateCartQuantity }) => {
 };
 
 export default CartPage;
+

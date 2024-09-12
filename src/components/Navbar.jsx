@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useCartContext } from '../Context/CartContext'; // Importa el contexto del carrito
 
-const Navbar = ({ token, handleLogout, total }) => {
+const Navbar = ({ token, handleLogout }) => {
+  const { total } = useCartContext(); // Consume el contexto
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
@@ -43,3 +46,4 @@ const Navbar = ({ token, handleLogout, total }) => {
 };
 
 export default Navbar;
+
