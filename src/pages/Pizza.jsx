@@ -13,7 +13,7 @@ function Pizza() {
   useEffect(() => {
     const getPizza = async () => {
       try {
-        const res = await fetch(`/api/pizzas/${id}`);
+        const res = await fetch(`http://localhost:5000/api/pizzas/${id}`); 
         if (!res.ok) {
           throw new Error('Error fetching the pizza');
         }
@@ -25,6 +25,7 @@ function Pizza() {
         setLoading(false);
       }
     };
+    
     getPizza();
   }, [id]);
 

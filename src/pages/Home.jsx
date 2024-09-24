@@ -7,10 +7,11 @@ const Home = () => {
   const { addToCart } = useCartContext(); 
 
   const getPizzas = async () => {
-    const respuesta = await fetch('/api/pizzas'); 
+    const respuesta = await fetch('http://localhost:5000/api/pizzas'); 
     const pizzas = await respuesta.json();
     setPizzas(pizzas);
   };
+  
 
   useEffect(() => {
     getPizzas();
