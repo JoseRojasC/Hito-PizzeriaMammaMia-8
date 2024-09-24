@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CardPizza from '../components/CardPizza';
 import { useCartContext } from '../Context/CartContext';
-import { pizzas as localPizzas } from '../data/pizzas'; 
+import { pizzas as localPizzas } from '../pizzas';
 
 const Home = () => {
   const [pizzas, setPizzas] = useState([]);

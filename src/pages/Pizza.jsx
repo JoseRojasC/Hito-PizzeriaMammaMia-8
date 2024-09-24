@@ -1,31 +1,38 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CardPizza from '../components/CardPizza';
-import { useCartContext } from '../Context/CartContext'; 
+import { pizzas } from '../pizzas'; 
+import { useCartContext } from '../Context/CartContext';
 
 function Pizza() {
   const { id } = useParams(); 
   const [pizza, setPizza] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { addToCart } = useCartContext(); 
+  const { addToCart } = useCartContext();
 
   useEffect(() => {
     const getPizza = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/pizzas/${id}`); 
+        // primero backend
+        const res = await fetch(`http://localhost:5000/api/pizzas/${id}`);
         if (!res.ok) {
-          throw new Error('Error fetching the pizza');
+          throw new Error('Error fetching pizza from backend');
         }
         const pizzaData = await res.json();
         setPizza(pizzaData);
       } catch (error) {
-        setError(error.message);
+        // Si hay un error con el backend, usamos el archivo local `pizza.js`
+        const pizzaFromLocal = pizzas.find(pizza => pizza.id === id);
+        if (pizzaFromLocal) {
+          setPizza(pizzaFromLocal);
+        } else {
+          setError('Pizza not found');
+        }
       } finally {
         setLoading(false);
       }
     };
-    
     getPizza();
   }, [id]);
 
@@ -37,9 +44,9 @@ function Pizza() {
         <p>Error: {error}</p>
       ) : (
         <CardPizza
-          pizza={pizza} 
-          addToCart={() => addToCart(pizza)} 
-          isDetailPage={true} 
+          pizza={pizza}
+          addToCart={() => addToCart(pizza)}
+          isDetailPage={true}
         />
       )}
     </div>
