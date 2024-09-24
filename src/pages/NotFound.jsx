@@ -7,7 +7,7 @@ const NotFound = () => {
       <h1 className="display-4">404 - Página no encontrada</h1>
       <p className="lead">Lo sentimos, la página que estás buscando no existe.</p>
       <img
-        src="/src/assets/imgs/404.jpg" // Ruta de la imagen
+        src="./assets/imgs/404.jpg" // Ruta de la imagen
         alt="Página no encontrada"
         className="img-fluid my-4"
         style={{ maxWidth: '400px' }}
