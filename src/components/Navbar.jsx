@@ -1,14 +1,16 @@
 import { Link } from 'react-router-dom';
-import { useCartContext } from '../Context/CartContext'; // Importa el contexto del carrito
+import { useCartContext } from '../Context/CartContext';
+import { useUserContext } from '../Context/UserContext';
 
-const Navbar = ({ token, handleLogout }) => {
-  const { total } = useCartContext(); // Consume el contexto
+const Navbar = () => {
+  const { total } = useCartContext();
+  const { token, logout } = useUserContext();
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
         <Link className="navbar-brand" to="/">🍕 Pizzería Mamma Mía!</Link>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
@@ -17,14 +19,15 @@ const Navbar = ({ token, handleLogout }) => {
               <Link className="nav-link" to="/">🍕 Home</Link>
             </li>
 
-            <li className="nav-item">
-              <Link className={`nav-link ${!token && 'disabled'}`} to="/profile">👤 Profile</Link>
-            </li>
-
             {token ? (
-              <li className="nav-item">
-                <button className="nav-link btn btn-link" onClick={handleLogout}>🔓 Logout</button>
-              </li>
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/profile">👤 Profile</Link>
+                </li>
+                <li className="nav-item">
+                  <button className="nav-link btn btn-link" onClick={logout}>🔓 Logout</button>
+                </li>
+              </>
             ) : (
               <>
                 <li className="nav-item">
@@ -46,4 +49,3 @@ const Navbar = ({ token, handleLogout }) => {
 };
 
 export default Navbar;
-

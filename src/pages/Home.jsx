@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import CardPizza from '../components/CardPizza';
-import { useCartContext } from '../Context/CartContext'; // Importa el contexto del carrito
+import { useCartContext } from '../Context/CartContext'; 
 
 const Home = () => {
   const [pizzas, setPizzas] = useState([]);
-  const { addToCart } = useCartContext(); // Usa el contexto del carrito
+  const { addToCart } = useCartContext(); 
 
   const getPizzas = async () => {
-    const respuesta = await fetch('http://localhost:5000/api/pizzas');
+    const respuesta = await fetch('/api/pizzas'); 
     const pizzas = await respuesta.json();
     setPizzas(pizzas);
   };
@@ -22,12 +22,8 @@ const Home = () => {
         {pizzas.map(pizza => (
           <CardPizza
             key={pizza.id}
-            name={pizza.name}
-            ingredients={pizza.ingredients}
-            price={pizza.price}
-            img={pizza.img}
-            desc={pizza.desc}
-            addToCart={() => addToCart(pizza)} // Llama al contexto para añadir
+            pizza={pizza} 
+            addToCart={() => addToCart(pizza)} 
           />
         ))}
       </div>
@@ -36,7 +32,4 @@ const Home = () => {
 };
 
 export default Home;
-
-
-
 

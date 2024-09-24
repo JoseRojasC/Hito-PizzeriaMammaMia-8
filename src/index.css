@@ -217,6 +217,15 @@ button:focus {
   transform: scale(1.05);
 }
 
+.btn-primary {
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+
+.btn-primary:hover {
+  transform: scale(1.05);
+}
+
 /* Register Modal Styles */
 .register-container {
   width: 100%;

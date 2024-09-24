@@ -1,15 +1,14 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
-import { useCartContext } from '../Context/CartContext'; // Importa el contexto del carrito
+import { useCartContext } from '../Context/CartContext';
+import { useUserContext } from '../Context/UserContext';  // Usa el contexto de usuario
 
 const CartPage = () => {
-  const { cartItems, total, removeFromCart, updateCartQuantity } = useCartContext(); // Usa el contexto
+  const { cartItems, total, removeFromCart, updateCartQuantity } = useCartContext();
+  const { token } = useUserContext(); // Accede al token
 
   return (
     <div className="container mt-5">
-      <h1 className="text-center mb-4">
-        <i className="fas fa-shopping-cart"></i> Carrito de Compras
-      </h1>
+      <h1 className="text-center mb-4"><i className="fas fa-shopping-cart"></i> Carrito de Compras</h1>
       {cartItems.length > 0 ? (
         <div className="card p-4 shadow">
           {cartItems.map((item) => (
@@ -22,36 +21,33 @@ const CartPage = () => {
                 <p><strong>Precio:</strong> ${item.price.toLocaleString()}</p>
               </div>
               <div className="col-md-3 d-flex align-items-center">
-                <Button
-                  variant="secondary"
+                <button
                   onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
-                  className="me-2"
+                  className="btn btn-secondary"
                 >
                   -
-                </Button>
+                </button>
                 <span>{item.quantity}</span>
-                <Button
-                  variant="secondary"
+                <button
                   onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
-                  className="ms-2"
+                  className="btn btn-secondary ms-2"
                 >
                   +
-                </Button>
+                </button>
               </div>
               <div className="col-md-3 text-end">
-                <Button
-                  variant="danger"
+                <button
                   onClick={() => removeFromCart(item.id)}
+                  className="btn btn-danger"
                 >
                   Eliminar
-                </Button>
+                </button>
               </div>
             </div>
           ))}
           <hr />
-          <h3 className="text-end">
-            Total a pagar: <span className="text-success">${total.toLocaleString()}</span>
-          </h3>
+          <h3 className="text-end">Total a pagar: <span className="text-success">${total.toLocaleString()}</span></h3>
+          <button className="btn btn-primary w-100" disabled={!token}>Pagar</button> {/* Deshabilitar si token es false */}
         </div>
       ) : (
         <p>No tienes productos en tu carrito de compras</p>
@@ -61,4 +57,3 @@ const CartPage = () => {
 };
 
 export default CartPage;
-

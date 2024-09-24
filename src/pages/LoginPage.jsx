@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';  
+import { useUserContext } from '../Context/UserContext';  
 
-const LoginPage = ({ onLogin }) => {
+const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const { login } = useUserContext(); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,10 +16,11 @@ const LoginPage = ({ onLogin }) => {
     } else if (password.length < 6) {
       setMessage('La contraseña debe tener al menos 6 caracteres.');
     } else {
-      const token = "fake-jwt-token";
-      onLogin(token);
+      const token = "fake-jwt-token";  
+      login(token);  
+
       setMessage('Inicio de sesión exitoso.');
-      setTimeout(() => navigate("/"), 2000);  // Redirigir al inicio después de 2 segundos
+      setTimeout(() => navigate('/profile'), 2000);  
     }
   };
 
@@ -59,3 +62,4 @@ const LoginPage = ({ onLogin }) => {
 };
 
 export default LoginPage;
+

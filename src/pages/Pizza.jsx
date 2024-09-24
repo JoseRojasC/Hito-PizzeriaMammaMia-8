@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
-import CardPizza from "../components/CardPizza";
-import { formatCurrency } from "../assets/helpers/format"; 
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import CardPizza from '../components/CardPizza';
+import { useCartContext } from '../Context/CartContext'; 
 
-function Pizzas() {
-  const [pizza, setPizza] = useState({})
-  const [loading, setLoading] = useState(true); 
-  const [error, setError] = useState(null);  
+function Pizza() {
+  const { id } = useParams(); 
+  const [pizza, setPizza] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { addToCart } = useCartContext(); 
+
   useEffect(() => {
     const getPizza = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/pizzas/p001");
+        const res = await fetch(`/api/pizzas/${id}`);
         if (!res.ok) {
-          throw new Error("Error fetching the pizza");
+          throw new Error('Error fetching the pizza');
         }
         const pizzaData = await res.json();
         setPizza(pizzaData);
@@ -21,31 +25,24 @@ function Pizzas() {
         setLoading(false);
       }
     };
-
     getPizza();
-  }, []);
+  }, [id]);
 
   return (
-    <div className="mt-5 d-flex justify-content-center">
+    <div className="container mt-5 d-flex justify-content-center">
       {loading ? (
         <p>Cargando pizza...</p>
       ) : error ? (
         <p>Error: {error}</p>
-      ) : Object.keys(pizza).length > 0 && (
+      ) : (
         <CardPizza
-          desc={pizza.desc}
-          name={pizza.name}
-          price={formatCurrency(pizza.price)}
-          ingredients={pizza.ingredients}
-          img={pizza.img}
-          isHome={false}
+          pizza={pizza} 
+          addToCart={() => addToCart(pizza)} 
+          isDetailPage={true} 
         />
       )}
     </div>
   );
 }
 
-export default Pizzas;
-
-
-
+export default Pizza;
