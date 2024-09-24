@@ -1,1 +1,1 @@
-Deploy: https://pizzeriamammamia-h4.netlify.app
+Deploy: https://hito7-pizzeria.netlify.app
