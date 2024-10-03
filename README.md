@@ -1,1 +1,1 @@
-Deploy: https://hito7-pizzeria.netlify.app
+Deploy: https://hito-8.netlify.app
