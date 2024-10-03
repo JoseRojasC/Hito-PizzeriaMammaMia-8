@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  
-import { useUserContext } from '../Context/UserContext';  
+import { useNavigate } from 'react-router-dom';
+import { useUserContext } from '../Context/UserContext'; 
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const { login } = useUserContext();  
   const navigate = useNavigate();
-  const { login } = useUserContext(); 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       setMessage('Todos los campos son obligatorios.');
     } else if (password.length < 6) {
       setMessage('La contraseña debe tener al menos 6 caracteres.');
     } else {
-      const token = "fake-jwt-token";  
-      login(token);  
-
-      setMessage('Inicio de sesión exitoso.');
-      setTimeout(() => navigate('/profile'), 2000);  
+      try {
+        await login({ email, password });
+        setMessage('Inicio de sesión exitoso.');
+        setTimeout(() => navigate("/profile"), 2000); 
+      } catch (error) {
+        setMessage('Credenciales incorrectas.');
+      }
     }
   };
 
@@ -62,4 +64,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-

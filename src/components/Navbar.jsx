@@ -19,7 +19,7 @@ const Navbar = () => {
               <Link className="nav-link" to="/">🍕 Home</Link>
             </li>
 
-            {token ? (
+            {token ? (  // Si el token existe, mostrar Profile y Logout
               <>
                 <li className="nav-item">
                   <Link className="nav-link" to="/profile">👤 Profile</Link>
@@ -28,7 +28,7 @@ const Navbar = () => {
                   <button className="nav-link btn btn-link" onClick={logout}>🔓 Logout</button>
                 </li>
               </>
-            ) : (
+            ) : (  // Si no hay token, mostrar Login y Register
               <>
                 <li className="nav-item">
                   <Link className="nav-link" to="/login">🔐 Login</Link>
@@ -49,3 +49,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

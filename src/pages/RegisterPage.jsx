@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUserContext } from '../Context/UserContext'; 
 
-const RegisterPage = ({ onRegister }) => {
+const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
+  const { register } = useUserContext(); 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password || !confirmPassword) {
       setMessage('Todos los campos son obligatorios.');
@@ -17,10 +19,13 @@ const RegisterPage = ({ onRegister }) => {
     } else if (password !== confirmPassword) {
       setMessage('Las contraseñas no coinciden.');
     } else {
-      const token = "fake-jwt-token";
-      onRegister(token);
-      setMessage('Registro exitoso.');
-      setTimeout(() => navigate("/"), 2000);  // Redirigir al inicio después de 2 segundos
+      try {
+        await register({ email, password });
+        setMessage('Registro exitoso.');
+        setTimeout(() => navigate("/profile"), 2000); 
+      } catch (error) {
+        setMessage('Error al registrarse.');
+      }
     }
   };
 
